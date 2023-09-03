@@ -1,0 +1,263 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Course Project API",
+    "description": "My Course Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Udemy Courses",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/courses": {
+      "get": {
+        "tags": [
+          "GetCourses"
+        ],
+        "summary": "Get all course in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Courses"
+            }
+          }
+        }
+      }
+    },
+    "/courses/level": {
+      "get": {
+        "tags": [
+          "CountCoursesByLevel"
+        ],
+        "summary": "Count all course by level",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CountSubject"
+            }
+          }
+        }
+      }
+    },
+    "/courses/subjects": {
+      "get": {
+        "tags": [
+          "GetDistinctSubject"
+        ],
+        "summary": "Get distinct Subject for all course",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/subjects/count": {
+      "get": {
+        "tags": [
+          "CountCourseBySubject"
+        ],
+        "summary": "Count course by subject",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "count": {
+                    "type": "number"
+                  },
+                  "subject": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/subjects/level/count": {
+      "get": {
+        "tags": [
+          "CountEachLevelForEachSubject"
+        ],
+        "summary": "Count each level for each course by subject",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "subject": {
+                    "type": "string"
+                  },
+                  "levels": {
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "level": {
+                          "type": "string"
+                        },
+                        "count": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/subjects/subscriber-lectures": {
+      "get": {
+        "tags": [
+          "CountSubscriberAndLectureBySubject"
+        ],
+        "summary": "Count subscriber and lecture of all course by subject",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "totalLectures": {
+                    "type": "number"
+                  },
+                  "totalSubscribers": {
+                    "type": "number"
+                  },
+                  "subject": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/subjects/most-expensive-course": {
+      "get": {
+        "tags": [
+          "GetMostExpensiveCourseBySubject"
+        ],
+        "summary": "get most expensive course by subject",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                  "maxPriceCourse": {
+                    "type": "number"
+                  },
+                  "maxPriceCourseDetails": {
+                    "$ref": "#/definitions/Course"
+                  },
+                  "subject": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  },
+  "definitions": {
+    "Course": {
+      "properties": {
+        "course_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "course_title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "is_paid": {
+          "type": "boolean"
+        },
+        "price": {
+          "type": "number"
+        },
+        "num_subscribers": {
+          "type": "number"
+        },
+        "level": {
+          "type": "string"
+        },
+        "num_lectures": {
+          "type": "number"
+        },
+        "num_reviews": {
+          "type": "number"
+        },
+        "published_timestamp": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        }
+      }
+    },
+    "Courses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Course"
+      }
+    },
+    "CountSubject": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "count": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

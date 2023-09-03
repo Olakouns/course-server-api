@@ -1,0 +1,19 @@
+{
+  "name": "cours_app",
+  "version": "1.0.0",
+  "description": "my udemy stat course application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "server": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Razacki KOUNASSO",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
+    "nodemon": "^3.0.1",
+    "swagger-ui-express": "^4.6.2"
+  }
+}
